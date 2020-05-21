@@ -1,0 +1,72 @@
+<div>    
+    {% for status in statuses  %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{status.client}}</td> 
+            <td>{{status.status_date}}</td>
+            <td>{{status.status_time}}</td>
+
+            {% if status.status_type == 'ONLINE' %}
+                <td class="badge badge-success">{{status.status_type}}</td>
+            {% elif status.status_type == 'OFFLINE' %}
+                <td class="badge badge-danger">{{status.status_type}}</td>
+            {% elif status.status_type == 'TIMED-OUT' %}
+                <td class="badge badge-warning">{{status.status_type}}</td>
+            {% else %}
+                <td class="badge badge-primary">{{status.status_type}}</td>
+            {% endif %}
+            <td>{{status.status_note}}</td>
+            <td>
+                <button type="button"
+                    class="btn btn-secondary btn-sm js-update-status" data-url="{% url 'client:update_status' status.pk %}">
+                    Update
+                </button>
+                <button type="button"
+                    class="btn btn-outline-primary btn-sm js-delete-status" data-url="{% url 'client:delete_status' status.pk %}">
+                    Delete
+                </button>
+            </td>
+        </tr>
+    {% endfor %}
+</div>
+
+{% if flag1 == False %}
+    <div>
+        {% if statuses.has_other_pages %}
+            <ul class="pagination justify-content-end">
+                {% if statuses.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ statuses.previous_page_number }}">&laquo;</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true"> <span>&laquo;</span></a>
+                    </li>
+                {% endif %}
+                {% for i in statuses.paginator.page_range %}
+                {% if statuses.number == i %}
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="#"><span>{{ i }} <span class="sr-only">(current)</span></span></a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                    </li>
+                {% endif %}
+                {% endfor %}
+                {% if statuses.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ statuses.next_page_number }}">&raquo;</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><span>&raquo;</span></a>
+                    </li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    </div>
+{% endif %}
+    
+
+    

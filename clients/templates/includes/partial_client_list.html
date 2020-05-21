@@ -1,0 +1,24 @@
+{% for client in clients %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{client.client_no}}</td>
+        <td>{{client}}</td>
+        <td>{{client.client_address}}</td>
+        <td>{{client.client_email}}</td>
+        <td>{{client.client_ip}}</td>
+        <td>
+            <button class="btn btn-outline-primary btn-sm js-update-client" data-url="{% url 'client:edit_client' client.pk %}">
+                Update
+            </button>
+            <button type="button"
+                class="btn btn-outline-danger btn-sm js-delete-client"
+                data-url="{% url 'client:delete_client' client.pk %}">
+                <span class="glyphicon glyphicon-trash"></span> Delete
+            </button>
+        </td>
+    </tr>
+{% empty %}
+    <tr>
+        <td colspan="7" class="text-center bg-warning">No Client</td>
+    </tr>
+{% endfor %}

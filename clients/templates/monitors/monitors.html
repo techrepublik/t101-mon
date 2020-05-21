@@ -1,0 +1,50 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    Monitoring
+{% endblock title %}
+
+{% block content %}
+    {% if user.is_authenticated  %}
+        {% include 'base/navbar-monitor.html' %}
+        <br>
+            <div class="container">
+                <div class="col col-2 mb-2 float-left">
+                    <strong>{{user.username}}</strong> :: <small>user</small>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover" id="monitorTable">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Client No</th>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>IP Address</th>
+                                <th>...</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {% include 'monitors/partial_monitor_list.html' %}
+                                
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal fade" id="newClient">
+                    <div class="modal-dialog">
+                        <div class="modal-content"></div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-5 mx-auto">
+                <br>
+                <div class="mt-4">
+                    <h5>You are not logged in</h5>
+                    <a href="{% url 'login' %}">login now.</a>
+                </div>
+            </div>
+        {% endif %}
+{% endblock content %}
+    

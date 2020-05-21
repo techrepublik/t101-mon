@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    Client Report PDF
+{% endblock title %}
+
+{% block content %}
+        <br>
+        <div>
+            <h5>Client List</h5>
+            <hr>
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Client No</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Email</th>
+                            <th>IP Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% include 'clients/partial_clients_pdf.html' %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+{% endblock content %}
+
+    
+    

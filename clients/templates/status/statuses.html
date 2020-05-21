@@ -1,0 +1,102 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    Status List
+{% endblock title %}
+
+{% block content %}
+    {% if user.is_authenticated  %}
+        {% include 'base/navbar-status.html' %}
+        <br>
+            <div class="container">
+                <div class="col col-2 mb-2 float-left">
+                    <strong>{{user.username}}</strong> :: <small>user</small>
+                </div>
+                <div class="col col-4 mb-2 float-right">
+                    <button type="button" class="btn btn-primary btn-sm js-pdf-client mx-2 float-right" onclick="window.open('/clients/report/')">
+                        PDF 
+                    </button>
+                    <button type="button" class="btn btn-primary btn-sm js-create-status mb-2 float-right" data-url="{% url 'client:create_status_1' %}">
+                        <span class="glyphicon glyphicon-plus"></span> New status   
+                    </button>
+                    
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover" id="statusTable">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Client</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                                <th>Note</th>
+                                <th>...</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% include 'status/partial_status_list.html' %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                    
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                            {% if flag1 == True %}
+                                    <div>
+                                        {% if statuses.has_other_pages %}
+                                            <ul class="pagination justify-content-end">
+                                                {% if statuses.has_previous %}
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="?page={{ statuses.previous_page_number }}">&laquo;</a>
+                                                    </li>
+                                                {% else %}
+                                                    <li class="page-item disabled">
+                                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true"> <span>&laquo;</span></a>
+                                                    </li>
+                                                {% endif %}
+                                                {% for i in statuses.paginator.page_range %}
+                                                {% if statuses.number == i %}
+                                                    <li class="page-item active" aria-current="page">
+                                                        <a class="page-link" href="#"><span>{{ i }} <span class="sr-only">(current)</span></span></a>
+                                                    </li>
+                                                {% else %}
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                                                    </li>
+                                                {% endif %}
+                                                {% endfor %}
+                                                {% if statuses.has_next %}
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="?page={{ statuses.next_page_number }}">&raquo;</a>
+                                                    </li>
+                                                {% else %}
+                                                    <li class="page-item disabled">
+                                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><span>&raquo;</span></a>
+                                                    </li>
+                                                {% endif %}
+                                            </ul>
+                                        {% endif %}
+                                    </div>
+                            {% endif %}
+
+                <div class="modal fade" id="newStatus">
+                    <div class="modal-dialog">
+                        <div class="modal-content"></div>
+                    </div>
+                </div>
+                
+            </div>
+    {% else %}
+        <div class="col-5 mx-auto">
+            <br>
+            <div class="mt-4">
+                <h5>You are not logged in</h5>
+                <a href="{% url 'login' %}">login now.</a>
+            </div>
+        </div>
+    {% endif %}
+{% endblock content %}
+    

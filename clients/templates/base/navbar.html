@@ -1,0 +1,15 @@
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'client:clients' %}">TJ-101 Computer Sales & Services</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="{% url 'client:clients' %}">Clients <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="{% url 'client:monitor_client' %}">Monitor</a>
+        <a class="nav-item nav-link" href="{% url 'client:statuses' %}">Status</a>
+        <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </div>
+    </div>
+    {% include 'base/navbar-user.html' %}
+</nav>

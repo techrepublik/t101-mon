@@ -1,0 +1,13 @@
+{% for client in clients %}
+    <tr>
+        <td>{{client.client_no}}</td>
+        <td>{{client}}</td>
+        <td>{{client.client_address}}</td>
+        <td>{{client.client_email}}</td>
+        <td>{{client.client_ip}}</td>
+    </tr>
+{% empty %}
+    <tr>
+        <td colspan="7" class="text-center bg-warning">No Client</td>
+    </tr>
+{% endfor %}

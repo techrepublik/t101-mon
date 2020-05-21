@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    TJ-101 System Login Page
+{% endblock title %}
+
+{% block content %}
+        <div class="col-3 mx-auto">
+            <div class="mt-4">
+                <div><h3>TJ-101 System Login</h3></div>
+                <hr>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form | crispy}}
+                    <button class="btn btn-primary" type="submit">Login</button>
+                </form>
+                </div>
+        </div>
+{% endblock content %}
+    

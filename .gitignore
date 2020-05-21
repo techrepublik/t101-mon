@@ -1,0 +1,6 @@
+#ignore
+Include/
+Lib/
+Scripts/
+.json
+.cfg
